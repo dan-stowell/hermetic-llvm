@@ -9,6 +9,12 @@ package(default_visibility = ["//visibility:public"])
 
 cc_sysroot(
     name = "macos_sdk_sysroot",
+    # Also pass -isysroot so the SDKROOT/DEVELOPER_DIR env vars can't override the
+    # hermetic sysroot (a bare --sysroot loses to them on Darwin).
+    args = [
+        "-isysroot",
+        "{sysroot}",
+    ],
     allowlist_include_directories = [
         "@macos_sdk//sysroot",
     ],

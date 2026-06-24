@@ -1,0 +1,13 @@
+load("@rules_cc//cc:cc_library.bzl", "cc_library")
+load(":isysroot_test.bzl", "isysroot_present_test")
+
+cc_library(
+    name = "probe",
+    srcs = ["probe.cc"],
+    tags = ["manual"],
+)
+
+isysroot_present_test(
+    name = "isysroot_present_test",
+    target_under_test = ":probe",
+)
